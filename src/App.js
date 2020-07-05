@@ -4,12 +4,12 @@ import './assets/stylesheet.css'
 import UserContainer from './components/UserContainer';
 
 class App extends Component {
-
+  // set states to store users and set loading value
   state = {
     users : [],
     isLoading: true
   };
-
+  // get users from randomuser api
   getUsers = () => {
     this.setState({isLoading: true});
     axios.get(`https://randomuser.me/api/?results=12&nat=US`)
@@ -25,8 +25,10 @@ class App extends Component {
         console.log('Error fetching data: ', error);
       })
   }
-
   render() {
+    // destructured props
+    const { getUsers } = this;
+    const { users, isLoading } = this.state;
     return (
       <Fragment>
         <header>
@@ -36,9 +38,10 @@ class App extends Component {
             </div>
           </div>
         </header>
-        <UserContainer getUsers={this.getUsers} results={this.state.users} />
+        <UserContainer getUsers={getUsers} results={users} isLoading={isLoading} />
       </Fragment>
     )
   }
 }
+
 export default App;

@@ -25,19 +25,18 @@ class UserContainer extends Component {
         // if next button is clicked increment id by 1
         if (e.target.id === 'modal-next') { this.setState((id === userLength ) ? {modalUser: 0} : {modalUser: id+1}); }
     }
-    // 
     render() {
         // destructured props
-        const {toggleModal, prevNextButton} = this;
-        const {showModal, modalUser} = this.state;
-        const {results} = this.props;
+        const { toggleModal, prevNextButton } = this;
+        const { showModal, modalUser } = this.state;
+        const { results, isLoading } = this.props;
         // map user to new array to generate user component to be rendered
         const user = results.map( (result, index) => <User user={result} key={result.login.salt} id={index} toggleModal={toggleModal} />);
         // return gallery div with each of the 'users' displayed
         return (
             <Fragment>
                 <div id="gallery" className="gallery">
-                    {user}
+                    { (isLoading) ? <p>Loading...</p> : user }
                 </div>
                 {/* generate modal window */}
                 { (showModal) ? <UserModal user={results[modalUser]} id={modalUser} toggleModal={toggleModal} prevNextButton={prevNextButton} /> : null }
