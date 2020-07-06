@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import './assets/stylesheet.css'
-import UserContainer from './components/UserContainer';
+import { UserContainer } from './components/UserContainer';
 
 class App extends Component {
   // set states to store users and set loading value
